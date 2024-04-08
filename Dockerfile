@@ -30,6 +30,7 @@ RUN curl https://dlcdn.apache.org/spark/spark-${SPARK_VERSION}/spark-${SPARK_VER
  && tar xvzf spark-${SPARK_VERSION}-bin-hadoop3.tgz --directory /opt/spark --strip-components 1 \
  && rm -rf spark-${SPARK_VERSION}-bin-hadoop3.tgz
 
+ENV JAVA_HOME /usr/lib/jvm/java-11-openjdk-amd64
 
 FROM spark-base as pyspark
 
@@ -58,3 +59,6 @@ COPY entrypoint.sh .
 RUN chmod +x entrypoint.sh
 
 ENTRYPOINT ["./entrypoint.sh"]
+
+EXPOSE 7077
+EXPOSE 8080
